@@ -62,24 +62,6 @@ class GridExample extends Component {
     )
   }
 
-  /* ***********************************************************
-  * STEP 4
-  * If your datasource is driven by Redux, you'll need to
-  * reset it when new data arrives.
-  * DO NOT! place `cloneWithRows` inside of render, since render
-  * is called very often, and should remain fast!  Just replace
-  * state's datasource on newProps.
-  *
-  * e.g.
-    componentWillReceiveProps (newProps) {
-      if (newProps.someData) {
-        this.setState(prevState => ({
-          dataSource: prevState.dataSource.cloneWithRows(newProps.someData)
-        }))
-      }
-    }
-  *************************************************************/
-
   // Used for friendly AlertMessage
   // returns true if the dataSource is empty
   _noRowData () {

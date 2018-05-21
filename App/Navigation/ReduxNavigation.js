@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import AppNavigation from './AppNavigation'
 
 class ReduxNavigation extends React.Component {
-  componentWillMount () {
+  componentDidMount () {
     if (Platform.OS === 'ios') return
     BackHandler.addEventListener('hardwareBackPress', () => {
       const { dispatch, nav } = this.props

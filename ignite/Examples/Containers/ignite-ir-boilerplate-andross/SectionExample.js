@@ -87,14 +87,7 @@ class ListviewSectionsExample extends Component {
   * is called very often, and should remain fast!  Just replace
   * state's datasource on newProps.
   *
-  * e.g.
-    componentWillReceiveProps (newProps) {
-      if (newProps.someData) {
-        this.setState(prevState => ({
-          dataSource: prevState.dataSource.cloneWithRowsAndSections(newProps.someData)
-        }))
-      }
-    }
+
   *************************************************************/
 
   // Used for friendly AlertMessage
