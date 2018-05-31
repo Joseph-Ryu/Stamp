@@ -3,6 +3,10 @@
 
 #  loyaltyapp
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/)
+This app can collect stamp cards. Customers no longer need to worry about having to carry many cards in their wallet. 
+The business can get data about their customers. 
+
+Uses QR code. 
 
 * Standard compliant React Native App Utilizing [Ignite](https://github.com/infinitered/ignite)
 
