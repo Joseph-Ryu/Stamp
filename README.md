@@ -1,3 +1,6 @@
+#  Screenshots
+![Alt text](./App/Images/Screenshots/img.jpg?raw=true "Optional Title")
+
 #  loyaltyapp
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/)
 
