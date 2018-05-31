@@ -19,7 +19,8 @@ export default class QuickScanScreen extends React.Component {
     this.qrComp = React.createRef()
   }
 
-  componentDidMount = () => {
+  componentDidMount = async () => {
+    console.log('****data****', await DbRoutines.getUserLoyaltyCardsAsync())
     console.log('registering AppState event listener')
     AppState.addEventListener('change', this.handleAppStateChange)
   }
@@ -39,7 +40,10 @@ export default class QuickScanScreen extends React.Component {
     }
   }
 
-  onSuccess = (e) => {
+  onSuccess = async (e) => {
+    // get list of users loyaltycards
+    // let userCards = await DbRoutines.getUserLoyaltyCards()
+
     console.log('scanned data', e)
     // Stub data
     // { "businessId": "2", "stampPin": "0101" }
