@@ -1,5 +1,5 @@
 #  Screenshots
-![Alt text](./App/Images/Screenshots/1.png?raw=true "Optional Title"){:height="700px" width="400px"}
+![Alt text](./App/Images/Screenshots/1.png?raw=true "Optional Title"){:height="300px" width="200px"}
 ![test image size](/img/post-bg-2015.jpg){:class="img-responsive"}
 ![test image size](/img/post-bg-2015.jpg){:height="50%" width="50%"}
 ![test image size](/img/post-bg-2015.jpg){:height="700px" width="400px"}
