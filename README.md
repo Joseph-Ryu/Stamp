@@ -1,6 +1,8 @@
 #  Screenshots
 ![Alt text](./App/Images/Screenshots/1.png?raw=true "Optional Title"){:class="img-responsive"}
-![Alt text](./App/Images/Screenshots/1.png?raw=true "Optional Title"){:height="20%" width="20%"}
+![Alt text](./App/Images/Screenshots/1.png?raw=true "Optional Title"){:height="50%" width="50%"}
+![Alt text](./App/Images/Screenshots/1.png?raw=true "Optional Title"){:height="700px" width="400px"}
+
 ![Alt text](./App/Images/Screenshots/2.png?raw=true "Optional Title")
 ![Alt text](./App/Images/Screenshots/3.png?raw=true "Optional Title")
 ![Alt text](./App/Images/Screenshots/4.png?raw=true "Optional Title")
