@@ -1,6 +1,6 @@
 #  Screenshots
 ![Alt text](./App/Images/Screenshots/1.png?raw=true "Optional Title")<!-- .element height="50%" width="50%" -->
-<img src="./App/Images/Screenshots/1.png" width="48">
+<img src="./App/Images/Screenshots/1.png" width="400">
 
 ![Alt text](./App/Images/Screenshots/2.png?raw=true "Optional Title")
 ![Alt text](./App/Images/Screenshots/3.png?raw=true "Optional Title")
