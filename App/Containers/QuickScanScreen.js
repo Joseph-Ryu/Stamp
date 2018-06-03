@@ -2,8 +2,6 @@ import React from 'react'
 import { View, Alert, AppState } from 'react-native'
 import BottomNavigation from '../Components/BottomNavigation'
 import QRCodeScanner from '../Components/QRScanner'
-
-// import TestData from '../../Tests/Data/TestData'
 import DbRoutines from '../Components/DatabaseRoutines'
 
 // Styles

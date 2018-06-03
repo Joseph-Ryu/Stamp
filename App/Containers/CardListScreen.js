@@ -13,7 +13,6 @@ export default class CardListScreen extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      // stub list for now
       cards: [],
       active: 'CardListScreen',
       userId: ''
