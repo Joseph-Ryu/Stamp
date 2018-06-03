@@ -1,11 +1,8 @@
 #  Screenshots
-![Alt text](./App/Images/Screenshots/1.png?raw=true "Optional Title")<!-- .element height="50%" width="50%" -->
 <img src="./App/Images/Screenshots/1.png" width="400">
-
-![Alt text](./App/Images/Screenshots/2.png?raw=true "Optional Title")
-![Alt text](./App/Images/Screenshots/3.png?raw=true "Optional Title")
-![Alt text](./App/Images/Screenshots/4.png?raw=true "Optional Title")
-
+<img src="./App/Images/Screenshots/2.png" width="400">
+<img src="./App/Images/Screenshots/3.png" width="400">
+<img src="./App/Images/Screenshots/4.png" width="400">
 
 #  loyaltyapp
 
