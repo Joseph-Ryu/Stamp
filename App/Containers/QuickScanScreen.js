@@ -8,19 +8,24 @@ import DbRoutines from '../Components/DatabaseRoutines'
 
 // Styles
 import styles from './Styles/QuickScanScreenStyles'
+import uniqueId from 'react-native-unique-id'
 
 export default class QuickScanScreen extends React.Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      active: 'QuickScanScreen'
+      active: 'QuickScanScreen',
+      userId: ''
     }
     this.qrComp = React.createRef()
   }
 
   componentDidMount = async () => {
-    console.log('****data****', await DbRoutines.getUserLoyaltyCardsAsync())
+    uniqueId(async (error, id) => {
+      if (error) return console.error(error)
+      this.setState({userId: id})
+    })
     console.log('registering AppState event listener')
     AppState.addEventListener('change', this.handleAppStateChange)
   }
@@ -42,15 +47,12 @@ export default class QuickScanScreen extends React.Component {
 
   onSuccess = async (e) => {
     // get list of users loyaltycards
-    // let userCards = await DbRoutines.getUserLoyaltyCards()
-
+    let userCards = await DbRoutines.getUserLoyaltyCardsAsync(this.state.userId)
+    console.log('user cards', userCards)
     console.log('scanned data', e)
-    // Stub data
     // { "businessId": "2", "stampPin": "0101" }
     let {businessId, stampPin} = JSON.parse(e.data)
-    // let scannedId = e.data.businessId
-    // let scannedPin = e.data.stampPin
-    let card = DbRoutines.findCardByBusinessId(businessId)
+    let card = userCards.find(c => c.businessId === businessId)
     let title, msg
     console.log('Card found?', card)
 
@@ -58,31 +60,30 @@ export default class QuickScanScreen extends React.Component {
     if (card) {
       title = `Quick Stamp`
     } else {
-      // TODO: create new card object
-      // stub
+      let business = await DbRoutines.getBusinessByIdAsync(businessId)
+      console.log('Business matched', business)
       card = {
-        UserId: 124,
-        BusinessId: businessId, // new
-        BusinessName: 'Some new store',
-        BusinessAddress: '100 Main Street\nN6H 5W3\nLondon, Ontario',
-        CreatedDate: new Date(),
-        LoyaltyPoint: 0,
-        ClaimPoint: 5,
-        ClaimCount: 1,
-        stampPin: '0101'
+        userId: this.state.userId,
+        businessId: business.businessId,
+        businessName: business.businessName,
+        businessAddress: business.businessAddress,
+        createdDate: new Date(),
+        loyaltyPoint: 0,
+        claimPoint: business.claimPoint,
+        claimCount: 0,
+        stampPin: business.stampPin
       }
       title = 'New Card!'
-      msg = `Added ${card.BusinessName} to your list`
+      msg = `Added ${card.businessName} to your list`
     }
     if (stampPin === card.stampPin) {
-      msg = `Stamped ${card.BusinessName}`
-      card.LoyaltyPoint++
-      // TODO: add/update to DB
-      // DbRoutines.addNewCard(card)
-
+      msg = `Stamped ${card.businessName}`
+      card.loyaltyPoint++
+      await DbRoutines.insertDataAsync('cards', card)
       this.props.navigation.navigate('CardScreen', card)
     } else {
-      msg = `Stamp failed for ${card.BusinessName}. Contact the developer`
+      title = 'Wrong pin'
+      msg = `Stamp failed for ${card.businessName}. Contact the developer`
     }
 
     Alert.alert(
@@ -100,6 +101,7 @@ export default class QuickScanScreen extends React.Component {
   }
 
   render () {
+    console.log('id from quickScanScreen', this.state.userId)
     return (
       <View style={styles.container}>
         <QRCodeScanner ref={this.qrComp} onSuccess={this.onSuccess} title={'Quick Card Scan'} />

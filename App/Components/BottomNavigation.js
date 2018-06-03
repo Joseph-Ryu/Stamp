@@ -10,12 +10,12 @@ export default class BotNavigation extends React.Component {
     }
   }
 
-  handlePress = (screen) => {
+  handlePress = (screen, data) => {
     if (screen === this.state.active) {
       return
     }
     this.setState({active: screen})
-    this.props.navigation.navigate(screen)
+    this.props.navigation.navigate(screen, data)
   }
 
   render () {
