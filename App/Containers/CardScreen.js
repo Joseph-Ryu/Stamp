@@ -33,10 +33,10 @@ export default class CardScreen extends React.Component {
   }
 
   displayStamps = () => {
-    const {ClaimPoint, LoyaltyPoint} = this.state.card
+    const {claimPoint, loyaltyPoint} = this.state.card
     let stampIcons = []
-    for (let i = 0; i < ClaimPoint; ++i) {
-      if (i < LoyaltyPoint) {
+    for (let i = 0; i < claimPoint; ++i) {
+      if (i < loyaltyPoint) {
         stampIcons.push(<Icon key={i} name='star' />)
       } else {
         stampIcons.push(<Icon key={i} name='star-border' />)
@@ -63,8 +63,8 @@ export default class CardScreen extends React.Component {
             this.claimPrizeDialog.show()
 
             let {card} = this.state
-            card.LoyaltyPoint = 0
-            card.ClaimCount++
+            card.loyaltyPoint = 0
+            card.claimCount++
             this.setState({card})
             console.log('User claimed free drink')
           }
@@ -91,22 +91,25 @@ export default class CardScreen extends React.Component {
   onQRSuccess = (e) => {
     // { "businessId": "2", "stampPin": "0101" }
     console.log('scanned data', e)
-    let scannedPin = JSON.parse(e.data).stampPin
+    let {businessId, stampPin} = JSON.parse(e.data)
     let title = ''
     let msg = ''
-    if (scannedPin === this.state.card.stampPin) {
+    if (businessId !== this.state.card.businessId) {
+      title = 'Wrong QR code'
+      msg = 'This QR code does not match the business'
+    } else if (stampPin === this.state.card.stampPin) {
       console.log('Pin match')
       title = 'Nice'
       msg = 'You earned a stamp!'
 
       let {card} = this.state
-      card.LoyaltyPoint++
+      card.loyaltyPoint++
       this.setState({card})
       this.stampDialog.dismiss()
     } else {
       console.log('Wrong pin, scan again')
       title = 'Warning'
-      msg = 'Wrong code'
+      msg = 'This QR code does not match the pin'
     }
     Alert.alert(
       title,
@@ -133,14 +136,14 @@ export default class CardScreen extends React.Component {
         <Card>
           <ListItem
             leftElement={`local-drink`}
-            centerElement={card.BusinessName}
+            centerElement={card.businessName}
             style={{container: {}, primaryText: {alignSelf: 'center', fontSize: 20}, leftElementContainer: {alignItems: 'flex-end'}}}
           />
-          <Text style={{left: '34%', fontWeight: '100', fontSize: 12, paddingBottom: 10}}>{card.BusinessAddress}</Text>
+          <Text style={{left: '34%', fontWeight: '100', fontSize: 12, paddingBottom: 10}}>{card.businessAddress}</Text>
         </Card>
         <Card>
           <ListItem
-            centerElement={`Collect ${card.ClaimPoint} to get a free coffee`}
+            centerElement={`Collect ${card.claimPoint} to get a free coffee`}
             style={{container: {}, primaryText: {alignSelf: 'center', fontSize: 18}}}
           />
           <View style={{flexDirection: 'row', justifyContent: 'center'}}>
@@ -148,11 +151,11 @@ export default class CardScreen extends React.Component {
           </View>
         </Card>
         {
-          card.LoyaltyPoint < card.ClaimPoint &&
+          card.loyaltyPoint < card.claimPoint &&
           <Button style={{container: {left: '20%', width: 100}}} raised primary text='Stamp' onPress={() => { this.stamp() }} />
         }
         {
-          !(card.LoyaltyPoint < card.ClaimPoint) &&
+          !(card.loyaltyPoint < card.claimPoint) &&
           <Button style={{container: {left: '20%', width: 100}}} raised primary text='Get Free' onPress={() => { this.claimPrize() }} />
         }
         <PopupDialog

@@ -4,9 +4,9 @@ import styles from './Styles/CardListScreenStyles'
 
 import { ListItem } from 'react-native-material-ui/src'
 import BottomNavigation from '../Components/BottomNavigation'
-
-import TestData from '../../Tests/Data/TestData'
-import firebase from 'react-native-firebase'
+import DbRoutines from '../Components/DatabaseRoutines'
+// import TestData from '../../Tests/Data/TestData'
+// import firebase from 'react-native-firebase'
 import uniqueId from 'react-native-unique-id'
 
 export default class CardListScreen extends React.Component {
@@ -14,36 +14,19 @@ export default class CardListScreen extends React.Component {
     super(props)
     this.state = {
       // stub list for now
-      cards: TestData.cards,
-      active: 'CardListScreen'
+      cards: [],
+      active: 'CardListScreen',
+      userId: ''
     }
   }
-  componentDidMount () {
-    uniqueId((error, id) => {
+  componentDidMount = async () => {
+    uniqueId(async (error, id) => {
       if (error) return console.error(error)
       console.log('phone-id', id)
+      let cards = await DbRoutines.getUserLoyaltyCardsAsync(id)
+      console.log('cards from cardlistscreen', cards)
+      this.setState({userId: id, cards})
     })
-
-    firebase.firestore().collection('business').doc('2').set({
-      joinedDate: new Date(),
-      businessName: 'Burrito Boyz',
-      businessType: 'Food',
-      loyaltyType: 'Stamp',
-      claimPoint: 10,
-      claimPrice: 6.99
-    })
-
-    // {
-    //   UserId: 1,
-    //   BusinessId: '1',
-    //   BusinessName: 'Fire Roasted Coffee',
-    //   BusinessAddress: '600 Proudfoot Lane\nN6H 5W3\nLondon, Ontario',
-    //   CreatedDate: new Date(),
-    //   LoyaltyPoint: 3,
-    //   ClaimPoint: 5,
-    //   ClaimCount: 4,
-    //   stampPin: '0101'
-    // },
   }
 
   createCardList = () => {
@@ -57,7 +40,7 @@ export default class CardListScreen extends React.Component {
           key={index}
           leftElement={`card-membership`}
           divider
-          centerElement={card.BusinessName}
+          centerElement={card.businessName}
           onPress={() => this.navigateToScreen('CardScreen', card)}
         />
       )
