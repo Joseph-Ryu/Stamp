@@ -1,5 +1,9 @@
 #  Screenshots
-![Alt text](./App/Images/Screenshots/img.jpg?raw=true "Optional Title")
+![Alt text](./App/Images/Screenshots/1.png?raw=true "Optional Title")
+![Alt text](./App/Images/Screenshots/2.png?raw=true "Optional Title")
+![Alt text](./App/Images/Screenshots/3.png?raw=true "Optional Title")
+![Alt text](./App/Images/Screenshots/4.png?raw=true "Optional Title")
+
 
 #  loyaltyapp
 
@@ -7,6 +11,7 @@ This app can collect stamp cards. Customers no longer need to worry about having
 The business can get data about their customers. 
 
 Uses QR code. 
+Uses firebase for external db.
 
 ## :arrow_up: How to Setup
 
